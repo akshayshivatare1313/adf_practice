@@ -1,0 +1,12 @@
+{
+	"name": "ds_sc_copy_API_data",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "REST_API",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "RestResource",
+		"schema": []
+	}
+}

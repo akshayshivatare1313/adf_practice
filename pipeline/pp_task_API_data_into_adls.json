@@ -1,0 +1,110 @@
+{
+	"name": "pp_task_API_data_into_adls",
+	"properties": {
+		"activities": [
+			{
+				"name": "Copy data from external API",
+				"type": "Copy",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "RestSource",
+						"httpRequestTimeout": "00:01:40",
+						"requestInterval": "00.00:00:00.010",
+						"requestMethod": "GET",
+						"paginationRules": {
+							"supportRFC5988": "true"
+						}
+					},
+					"sink": {
+						"type": "DelimitedTextSink",
+						"storeSettings": {
+							"type": "AzureBlobFSWriteSettings"
+						},
+						"formatSettings": {
+							"type": "DelimitedTextWriteSettings",
+							"quoteAllText": true,
+							"fileExtension": ".txt"
+						}
+					},
+					"enableStaging": false,
+					"translator": {
+						"type": "TabularTranslator",
+						"mappings": [
+							{
+								"source": {
+									"path": "['ID Nation']"
+								},
+								"sink": {
+									"name": "ID Nation"
+								}
+							},
+							{
+								"source": {
+									"path": "['Nation']"
+								},
+								"sink": {
+									"name": "Nation"
+								}
+							},
+							{
+								"source": {
+									"path": "['ID Year']"
+								},
+								"sink": {
+									"name": "ID Year"
+								}
+							},
+							{
+								"source": {
+									"path": "['Year']"
+								},
+								"sink": {
+									"name": "Year"
+								}
+							},
+							{
+								"source": {
+									"path": "['Population']"
+								},
+								"sink": {
+									"name": "Population"
+								}
+							},
+							{
+								"source": {
+									"path": "['Slug Nation']"
+								},
+								"sink": {
+									"name": "Slug Nation"
+								}
+							}
+						],
+						"collectionReference": "$['data']"
+					}
+				},
+				"inputs": [
+					{
+						"referenceName": "ds_sc_copy_API_data",
+						"type": "DatasetReference"
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "ds_sn_api_to_adls_csv",
+						"type": "DatasetReference"
+					}
+				]
+			}
+		],
+		"annotations": []
+	}
+}
