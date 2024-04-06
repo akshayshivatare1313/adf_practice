@@ -1,0 +1,58 @@
+{
+	"name": "ds_sn_curated_imdb",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "blob_",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"fileName": "imdb.csv",
+				"folderPath": "IMDB_raw",
+				"container": "containsource"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": [
+			{
+				"name": "title",
+				"type": "String"
+			},
+			{
+				"name": "director",
+				"type": "String"
+			},
+			{
+				"name": "release_year",
+				"type": "String"
+			},
+			{
+				"name": "runtime",
+				"type": "String"
+			},
+			{
+				"name": "genre",
+				"type": "String"
+			},
+			{
+				"name": "rating",
+				"type": "String"
+			},
+			{
+				"name": "metascore",
+				"type": "String"
+			},
+			{
+				"name": "gross",
+				"type": "String"
+			}
+		]
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

@@ -1,0 +1,21 @@
+{
+	"name": "ds_sn_copy_parquet_adls_Curated",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "lsADLS",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "Parquet",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"folderPath": "Curated_zone",
+				"fileSystem": "containdestination"
+			},
+			"compressionCodec": "snappy"
+		},
+		"schema": []
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

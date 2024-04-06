@@ -1,0 +1,49 @@
+{
+	"name": "ds_sc_copy_parquet_adls",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "lsADLS",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "Parquet",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"fileSystem": "containdestination"
+			},
+			"compressionCodec": "snappy"
+		},
+		"schema": [
+			{
+				"name": "Rank",
+				"type": "UTF8"
+			},
+			{
+				"name": "Country",
+				"type": "UTF8"
+			},
+			{
+				"name": "Gold",
+				"type": "UTF8"
+			},
+			{
+				"name": "Silver",
+				"type": "UTF8"
+			},
+			{
+				"name": "Bronze",
+				"type": "UTF8"
+			},
+			{
+				"name": "Total",
+				"type": "UTF8"
+			},
+			{
+				"name": "RankbyTotal",
+				"type": "UTF8"
+			}
+		]
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

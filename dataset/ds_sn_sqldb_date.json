@@ -1,0 +1,17 @@
+{
+	"name": "ds_sn_sqldb_date",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "ls_sql_db",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "tblEmployeesNewDates"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

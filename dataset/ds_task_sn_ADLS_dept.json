@@ -1,0 +1,30 @@
+{
+	"name": "ds_task_sn_ADLS_dept",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "lsADLS",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"fileName": "dept.csv",
+				"folderPath": "bronze",
+				"fileSystem": "containdestination"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": [
+			{
+				"name": "id\tname\tcity\tsalary",
+				"type": "String"
+			}
+		]
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

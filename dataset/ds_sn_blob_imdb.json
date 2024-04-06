@@ -1,0 +1,25 @@
+{
+	"name": "ds_sn_blob_imdb",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "blob_",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"fileName": "imdb.csv",
+				"folderPath": "IMDB_raw",
+				"container": "containsource"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": []
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

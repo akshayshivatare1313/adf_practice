@@ -1,0 +1,31 @@
+{
+	"name": "ds_task_sc_SQL_dept",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "ls_sql_db",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [
+			{
+				"name": "deptno",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "dname",
+				"type": "varchar"
+			},
+			{
+				"name": "loc",
+				"type": "varchar"
+			}
+		],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "dept"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

@@ -1,0 +1,28 @@
+{
+	"name": "ds_sn_copy_multi_tables",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "ls_sql_db",
+			"type": "LinkedServiceReference"
+		},
+		"parameters": {
+			"tablename": {
+				"type": "string"
+			}
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [],
+		"typeProperties": {
+			"schema": {
+				"value": "@split(dataset().tablename,'.').[0]",
+				"type": "Expression"
+			},
+			"table": {
+				"value": "@split(dataset().tablename,'.').[1]",
+				"type": "Expression"
+			}
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

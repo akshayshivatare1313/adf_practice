@@ -1,0 +1,51 @@
+{
+	"name": "ds_sn_http_server_git_teams_parque",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "lsADLS",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "Parquet",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"fileName": "teams.parquet",
+				"folderPath": "Raw_zone",
+				"fileSystem": "containdestination"
+			},
+			"compressionCodec": "snappy"
+		},
+		"schema": [
+			{
+				"name": "FL_DATE",
+				"type": "DATE"
+			},
+			{
+				"name": "DEP_DELAY",
+				"type": "INT_16"
+			},
+			{
+				"name": "ARR_DELAY",
+				"type": "INT_16"
+			},
+			{
+				"name": "AIR_TIME",
+				"type": "INT_16"
+			},
+			{
+				"name": "DISTANCE",
+				"type": "INT_16"
+			},
+			{
+				"name": "DEP_TIME",
+				"type": "FLOAT"
+			},
+			{
+				"name": "ARR_TIME",
+				"type": "FLOAT"
+			}
+		]
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

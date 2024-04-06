@@ -1,0 +1,25 @@
+{
+	"name": "ds_sn_curated_from_raw_imdb",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "blob_",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"fileName": "imdb.csv",
+				"folderPath": "IMDB_curated",
+				"container": "containsource"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": []
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

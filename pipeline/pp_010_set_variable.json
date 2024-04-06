@@ -1,0 +1,86 @@
+{
+	"name": "pp_010_set_variable",
+	"properties": {
+		"activities": [
+			{
+				"name": "Set variable string",
+				"type": "SetVariable",
+				"dependsOn": [],
+				"policy": {
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"variableName": "x",
+					"value": "Akshay"
+				}
+			},
+			{
+				"name": "Set variable number",
+				"type": "SetVariable",
+				"dependsOn": [],
+				"policy": {
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"variableName": "y",
+					"value": 13000
+				}
+			},
+			{
+				"name": "Set variable utc now",
+				"type": "SetVariable",
+				"dependsOn": [],
+				"policy": {
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"variableName": "current date",
+					"value": {
+						"value": "@utcnow()",
+						"type": "Expression"
+					}
+				}
+			},
+			{
+				"name": "Set variable subtime",
+				"type": "SetVariable",
+				"dependsOn": [],
+				"policy": {
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"variableName": "subtime",
+					"value": {
+						"value": "@subtractFromTime(utcnow(),10,'Month')",
+						"type": "Expression"
+					}
+				}
+			}
+		],
+		"variables": {
+			"x": {
+				"type": "String"
+			},
+			"y": {
+				"type": "Integer"
+			},
+			"current date": {
+				"type": "String"
+			},
+			"subtime": {
+				"type": "String"
+			}
+		},
+		"annotations": [],
+		"lastPublishTime": "2024-03-15T06:16:51Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}

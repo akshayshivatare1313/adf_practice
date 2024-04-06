@@ -1,0 +1,9 @@
+{
+	"name": "df-test-process",
+	"location": "eastus",
+	"identity": {
+		"type": "SystemAssigned",
+		"principalId": "547640c4-2428-40c3-ad48-6fca98823615",
+		"tenantId": "1852c251-c3aa-4ae2-8533-119432dfd330"
+	}
+}

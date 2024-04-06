@@ -1,0 +1,46 @@
+{
+	"name": "pp_022_Filter_activity",
+	"properties": {
+		"activities": [
+			{
+				"name": "Filter1",
+				"type": "Filter",
+				"dependsOn": [],
+				"userProperties": [],
+				"typeProperties": {
+					"items": {
+						"value": "@pipeline().parameters.countries",
+						"type": "Expression"
+					},
+					"condition": {
+						"value": "@contains(item(),'a' )",
+						"type": "Expression"
+					}
+				}
+			}
+		],
+		"parameters": {
+			"numbers": {
+				"type": "array",
+				"defaultValue": [
+					1,
+					3,
+					5,
+					7,
+					9
+				]
+			},
+			"countries": {
+				"type": "array",
+				"defaultValue": [
+					"india",
+					"russia",
+					"israel"
+				]
+			}
+		},
+		"annotations": [],
+		"lastPublishTime": "2024-03-19T08:47:05Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}
