@@ -27,6 +27,10 @@
 			"type": "string",
 			"defaultValue": "https://raw.githubusercontent.com/akshayshivatare1313/basic/master/imdb_raw_data.csv"
 		},
+		"REST_API_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://datausa.io/api/data?drilldowns=Nation&measures=Population"
+		},
 		"connfirstdemo_properties_typeProperties_url": {
 			"type": "string",
 			"defaultValue": "https://first1teststorage.dfs.core.windows.net/"
@@ -2835,6 +2839,127 @@
 			]
 		},
 		{
+			"name": "[concat(parameters('factoryName'), '/pp_task_API_data_into_adls')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "Copy data from external API",
+						"type": "Copy",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "0.12:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"source": {
+								"type": "RestSource",
+								"httpRequestTimeout": "00:01:40",
+								"requestInterval": "00.00:00:00.010",
+								"requestMethod": "GET",
+								"paginationRules": {
+									"supportRFC5988": "true"
+								}
+							},
+							"sink": {
+								"type": "DelimitedTextSink",
+								"storeSettings": {
+									"type": "AzureBlobFSWriteSettings"
+								},
+								"formatSettings": {
+									"type": "DelimitedTextWriteSettings",
+									"quoteAllText": true,
+									"fileExtension": ".txt"
+								}
+							},
+							"enableStaging": false,
+							"translator": {
+								"type": "TabularTranslator",
+								"mappings": [
+									{
+										"source": {
+											"path": "[['ID Nation']"
+										},
+										"sink": {
+											"name": "ID Nation"
+										}
+									},
+									{
+										"source": {
+											"path": "[['Nation']"
+										},
+										"sink": {
+											"name": "Nation"
+										}
+									},
+									{
+										"source": {
+											"path": "[['ID Year']"
+										},
+										"sink": {
+											"name": "ID Year"
+										}
+									},
+									{
+										"source": {
+											"path": "[['Year']"
+										},
+										"sink": {
+											"name": "Year"
+										}
+									},
+									{
+										"source": {
+											"path": "[['Population']"
+										},
+										"sink": {
+											"name": "Population"
+										}
+									},
+									{
+										"source": {
+											"path": "[['Slug Nation']"
+										},
+										"sink": {
+											"name": "Slug Nation"
+										}
+									}
+								],
+								"collectionReference": "$['data']"
+							}
+						},
+						"inputs": [
+							{
+								"referenceName": "ds_sc_copy_API_data",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						],
+						"outputs": [
+							{
+								"referenceName": "ds_sn_api_to_adls_csv",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						]
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {}
+				},
+				"annotations": []
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/datasets/ds_sc_copy_API_data')]",
+				"[concat(variables('factoryId'), '/datasets/ds_sn_api_to_adls_csv')]"
+			]
+		},
+		{
 			"name": "[concat(parameters('factoryName'), '/pp_task_SQL_ADLS_increament_data')]",
 			"type": "Microsoft.DataFactory/factories/pipelines",
 			"apiVersion": "2018-06-01",
@@ -4013,6 +4138,24 @@
 			]
 		},
 		{
+			"name": "[concat(parameters('factoryName'), '/ds_sc_copy_API_data')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "REST_API",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "RestResource",
+				"typeProperties": {},
+				"schema": []
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/REST_API')]"
+			]
+		},
+		{
 			"name": "[concat(parameters('factoryName'), '/ds_sc_copy_from_order_table')]",
 			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
@@ -4734,6 +4877,35 @@
 				"typeProperties": {
 					"location": {
 						"type": "AzureBlobFSLocation",
+						"fileSystem": "containdestination"
+					},
+					"columnDelimiter": ",",
+					"escapeChar": "\\",
+					"firstRowAsHeader": true,
+					"quoteChar": "\""
+				},
+				"schema": []
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/lsADLS')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/ds_sn_api_to_adls_csv')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "lsADLS",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "DelimitedText",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobFSLocation",
+						"fileName": "api_data.csv",
+						"folderPath": "datausa_io_api",
 						"fileSystem": "containdestination"
 					},
 					"columnDelimiter": ",",
@@ -5632,6 +5804,21 @@
 				"type": "HttpServer",
 				"typeProperties": {
 					"url": "[parameters('HttpServer1_properties_typeProperties_url')]",
+					"enableServerCertificateValidation": true,
+					"authenticationType": "Anonymous"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/REST_API')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "RestService",
+				"typeProperties": {
+					"url": "[parameters('REST_API_properties_typeProperties_url')]",
 					"enableServerCertificateValidation": true,
 					"authenticationType": "Anonymous"
 				}

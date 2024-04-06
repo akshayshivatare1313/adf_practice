@@ -27,6 +27,10 @@
 			"type": "string",
 			"defaultValue": "https://raw.githubusercontent.com/akshayshivatare1313/basic/master/imdb_raw_data.csv"
 		},
+		"REST_API_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://datausa.io/api/data?drilldowns=Nation&measures=Population"
+		},
 		"connfirstdemo_properties_typeProperties_url": {
 			"type": "string",
 			"defaultValue": "https://first1teststorage.dfs.core.windows.net/"
@@ -84,6 +88,9 @@
 					},
 					"HttpServer1_properties_typeProperties_url": {
 						"value": "[parameters('HttpServer1_properties_typeProperties_url')]"
+					},
+					"REST_API_properties_typeProperties_url": {
+						"value": "[parameters('REST_API_properties_typeProperties_url')]"
 					},
 					"connfirstdemo_properties_typeProperties_url": {
 						"value": "[parameters('connfirstdemo_properties_typeProperties_url')]"

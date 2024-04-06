@@ -13,6 +13,48 @@
 	},
 	"resources": [
 		{
+			"name": "[concat(parameters('factoryName'), '/ds_getmeta_csv_blob')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "blob_",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "DelimitedText",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobStorageLocation",
+						"container": "mycontainer"
+					},
+					"columnDelimiter": ",",
+					"escapeChar": "\\",
+					"firstRowAsHeader": true,
+					"quoteChar": "\""
+				},
+				"schema": [
+					{
+						"name": "Name",
+						"type": "String"
+					},
+					{
+						"name": "Category",
+						"type": "String"
+					},
+					{
+						"name": "Status",
+						"type": "String"
+					},
+					{
+						"name": "Error",
+						"type": "String"
+					}
+				]
+			},
+			"dependsOn": []
+		},
+		{
 			"name": "[concat(parameters('factoryName'), '/ds_look_up_filter')]",
 			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
@@ -275,6 +317,22 @@
 						"type": "String"
 					}
 				]
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/ds_sc_copy_API_data')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "REST_API",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "RestResource",
+				"typeProperties": {},
+				"schema": []
 			},
 			"dependsOn": []
 		},
@@ -658,132 +716,6 @@
 						}
 					}
 				}
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/ds_sc_orc')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "lsADLS",
-					"type": "LinkedServiceReference"
-				},
-				"annotations": [],
-				"type": "Orc",
-				"typeProperties": {
-					"location": {
-						"type": "AzureBlobFSLocation",
-						"fileSystem": "containsource"
-					},
-					"enablePhysicalSchema": true
-				},
-				"schema": [
-					{
-						"type": "TIMESTAMP",
-						"name": "_col0"
-					},
-					{
-						"type": "INT",
-						"name": "_col1"
-					},
-					{
-						"type": "STRING",
-						"name": "_col2"
-					},
-					{
-						"type": "STRING",
-						"name": "_col3"
-					},
-					{
-						"type": "STRING",
-						"name": "_col4"
-					},
-					{
-						"type": "STRING",
-						"name": "_col5"
-					},
-					{
-						"type": "STRING",
-						"name": "_col6"
-					},
-					{
-						"type": "STRING",
-						"name": "_col7"
-					},
-					{
-						"type": "STRING",
-						"name": "_col8"
-					},
-					{
-						"type": "STRING",
-						"name": "_col9"
-					},
-					{
-						"type": "DOUBLE",
-						"name": "_col10"
-					},
-					{
-						"type": "STRING",
-						"name": "_col11"
-					},
-					{
-						"type": "STRING",
-						"name": "_col12"
-					}
-				]
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/ds_sc_parquet')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "lsADLS",
-					"type": "LinkedServiceReference"
-				},
-				"annotations": [],
-				"type": "Parquet",
-				"typeProperties": {
-					"location": {
-						"type": "AzureBlobFSLocation",
-						"fileSystem": "containsource"
-					},
-					"compressionCodec": "snappy"
-				},
-				"schema": [
-					{
-						"name": "FL_DATE",
-						"type": "DATE"
-					},
-					{
-						"name": "DEP_DELAY",
-						"type": "INT_16"
-					},
-					{
-						"name": "ARR_DELAY",
-						"type": "INT_16"
-					},
-					{
-						"name": "AIR_TIME",
-						"type": "INT_16"
-					},
-					{
-						"name": "DISTANCE",
-						"type": "INT_16"
-					},
-					{
-						"name": "DEP_TIME",
-						"type": "FLOAT"
-					},
-					{
-						"name": "ARR_TIME",
-						"type": "FLOAT"
-					}
-				]
 			},
 			"dependsOn": []
 		}

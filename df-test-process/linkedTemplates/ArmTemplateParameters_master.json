@@ -20,6 +20,9 @@
 		"HttpServer1_properties_typeProperties_url": {
 			"value": "https://raw.githubusercontent.com/akshayshivatare1313/basic/master/imdb_raw_data.csv"
 		},
+		"REST_API_properties_typeProperties_url": {
+			"value": "https://datausa.io/api/data?drilldowns=Nation&measures=Population"
+		},
 		"connfirstdemo_properties_typeProperties_url": {
 			"value": "https://first1teststorage.dfs.core.windows.net/"
 		},
