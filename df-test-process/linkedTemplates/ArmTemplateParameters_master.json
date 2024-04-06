@@ -1,0 +1,42 @@
+{
+	"$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"factoryName": {
+			"value": "df-test-process"
+		},
+		"blob__connectionString": {
+			"value": ""
+		},
+		"connfirstdemo_accountKey": {
+			"value": ""
+		},
+		"lsADLS_accountKey": {
+			"value": ""
+		},
+		"ls_sql_db_connectionString": {
+			"value": ""
+		},
+		"HttpServer1_properties_typeProperties_url": {
+			"value": "https://raw.githubusercontent.com/akshayshivatare1313/basic/master/imdb_raw_data.csv"
+		},
+		"connfirstdemo_properties_typeProperties_url": {
+			"value": "https://first1teststorage.dfs.core.windows.net/"
+		},
+		"http_medals_git_properties_typeProperties_url": {
+			"value": "https://raw.githubusercontent.com/akshayshivatare1313/olympic_data/main/Medals.csv"
+		},
+		"http_teams_git_properties_typeProperties_url": {
+			"value": "https://raw.githubusercontent.com/akshayshivatare1313/olympic_data/main/Teams.csv"
+		},
+		"lsADLS_properties_typeProperties_url": {
+			"value": "https://storageaccounttestakshay.dfs.core.windows.net/"
+		},
+		"containerUri": {
+			"value": ""
+		},
+		"containerSasToken": {
+			"value": ""
+		}
+	}
+}

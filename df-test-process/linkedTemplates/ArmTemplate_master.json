@@ -1,0 +1,185 @@
+{
+	"$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"factoryName": {
+			"type": "string",
+			"metadata": "Data Factory name",
+			"defaultValue": "df-test-process"
+		},
+		"blob__connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'blob_'"
+		},
+		"connfirstdemo_accountKey": {
+			"type": "secureString",
+			"metadata": "Secure string for 'accountKey' of 'connfirstdemo'"
+		},
+		"lsADLS_accountKey": {
+			"type": "secureString",
+			"metadata": "Secure string for 'accountKey' of 'lsADLS'"
+		},
+		"ls_sql_db_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'ls_sql_db'"
+		},
+		"HttpServer1_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://raw.githubusercontent.com/akshayshivatare1313/basic/master/imdb_raw_data.csv"
+		},
+		"connfirstdemo_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://first1teststorage.dfs.core.windows.net/"
+		},
+		"http_medals_git_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://raw.githubusercontent.com/akshayshivatare1313/olympic_data/main/Medals.csv"
+		},
+		"http_teams_git_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://raw.githubusercontent.com/akshayshivatare1313/olympic_data/main/Teams.csv"
+		},
+		"lsADLS_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://storageaccounttestakshay.dfs.core.windows.net/"
+		},
+		"containerUri": {
+			"type": "string",
+			"metadata": "URI to storage account containing linked ARM templates"
+		},
+		"containerSasToken": {
+			"type": "string",
+			"metadata": "Sas token to storage account containing linked ARM templates"
+		}
+	},
+	"variables": {
+		"factoryId": "[concat('Microsoft.DataFactory/factories/', parameters('factoryName'))]"
+	},
+	"resources": [
+		{
+			"name": "df-test-process_ArmTemplate_0",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2018-02-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_0.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
+					},
+					"blob__connectionString": {
+						"value": "[parameters('blob__connectionString')]"
+					},
+					"connfirstdemo_accountKey": {
+						"value": "[parameters('connfirstdemo_accountKey')]"
+					},
+					"lsADLS_accountKey": {
+						"value": "[parameters('lsADLS_accountKey')]"
+					},
+					"ls_sql_db_connectionString": {
+						"value": "[parameters('ls_sql_db_connectionString')]"
+					},
+					"HttpServer1_properties_typeProperties_url": {
+						"value": "[parameters('HttpServer1_properties_typeProperties_url')]"
+					},
+					"connfirstdemo_properties_typeProperties_url": {
+						"value": "[parameters('connfirstdemo_properties_typeProperties_url')]"
+					},
+					"http_medals_git_properties_typeProperties_url": {
+						"value": "[parameters('http_medals_git_properties_typeProperties_url')]"
+					},
+					"http_teams_git_properties_typeProperties_url": {
+						"value": "[parameters('http_teams_git_properties_typeProperties_url')]"
+					},
+					"lsADLS_properties_typeProperties_url": {
+						"value": "[parameters('lsADLS_properties_typeProperties_url')]"
+					}
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "df-test-process_ArmTemplate_1",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2018-02-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_1.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
+					}
+				}
+			},
+			"dependsOn": [
+				"[resourceId('Microsoft.Resources/deployments', 'df-test-process_ArmTemplate_0')]"
+			]
+		},
+		{
+			"name": "df-test-process_ArmTemplate_2",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2018-02-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_2.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
+					}
+				}
+			},
+			"dependsOn": [
+				"[resourceId('Microsoft.Resources/deployments', 'df-test-process_ArmTemplate_1')]"
+			]
+		},
+		{
+			"name": "df-test-process_ArmTemplate_3",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2018-02-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_3.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
+					}
+				}
+			},
+			"dependsOn": [
+				"[resourceId('Microsoft.Resources/deployments', 'df-test-process_ArmTemplate_2')]"
+			]
+		},
+		{
+			"name": "df-test-process_ArmTemplate_4",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2018-02-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_4.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
+					}
+				}
+			},
+			"dependsOn": [
+				"[resourceId('Microsoft.Resources/deployments', 'df-test-process_ArmTemplate_3')]"
+			]
+		}
+	]
+}
